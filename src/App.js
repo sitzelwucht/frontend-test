@@ -10,7 +10,7 @@ import axios from 'axios'
 function App() {
 
   const [data, setData] = useState(() => {
-    getData(3).then(result => setData(result)) 
+    getData(5).then(result => setData(result)) 
   })
   const [filteredData, setFilteredData] = useState(data)
   

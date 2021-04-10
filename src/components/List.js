@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ListItem from './ListItem'
 
 export default function List(props) {
 
-    // if filtered data array is not empty, show filtered data, otherwise show all data
+    const [shownData, setShownData] = useState(props.data)
+
+    // set shown data to be whichever array was updated last
+    useEffect(() => {
+        setShownData(props.data)
+    }, [props.data])
+
+    useEffect(() => {
+        setShownData(props.filteredData)
+    }, [props.filteredData])
+
+
     return (
         <div>
-           { (!props.data && !props.data) ? <div className="mx-auto w-50">loading...</div> : 
-                !props.filteredData ? props.data.map((item, index) => {
-                    return <ListItem key={index} itemName={item} />
-                }) : 
-                props.filteredData.map((item, index) => {
-                    return <ListItem key={index} itemName={item} />
-                })
+            {
+                !shownData ? 
+                <div className="mx-auto w-50">loading...</div> : 
+                shownData.map((item, i) => {
+                    return <ListItem key={i} itemName={item} />
+                }) 
              } 
         </div>
     )
