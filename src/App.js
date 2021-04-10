@@ -15,7 +15,7 @@ function App() {
   const [filteredData, setFilteredData] = useState(data)
   
 
-  // fetch a randomized set of items from API
+  // fetch a randomized set of items from external API
   async function getData(n) {
     const response = await axios.get(`https://random-data-api.com/api/food/random_food?size=${n}`)
     const items =  response.data.map(item => {
@@ -25,12 +25,13 @@ function App() {
   }
 
 
-  // fetch 100 random items, get one item from a random index and add it to the state
+  // fetch 200 random items, get one item from a random index and add it to the state
   const handleAdd = async (e) => {
     e.preventDefault()
     try {
         const response = await getData(100)
         const newItem = response[Math.floor(Math.random() * response.length)]
+
         setData(previousData => {
           return [newItem, ...previousData]
         })
@@ -46,6 +47,7 @@ function App() {
       let filteredItems = data.filter(item => {
           return item.toLowerCase().includes(query)
       })
+
       setFilteredData(filteredItems)
   }
 
