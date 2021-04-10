@@ -43,7 +43,7 @@ function App() {
 
   // filter shown results by search string
   const handleChange = (e) => {
-      let query = e.target.value
+      let query = e.target.value.toLowerCase()
       let filteredItems = data.filter(item => {
           return item.toLowerCase().includes(query)
       })
